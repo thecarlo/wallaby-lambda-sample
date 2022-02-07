@@ -1,0 +1,110 @@
+{
+  "name": "urp-microservice-lambda-template",
+  "version": "1.0.0",
+  "description": "Microservice Lambda Template",
+  "scripts": {
+    "build": "npm run clean && npm run check-types && webpack --mode=production",
+    "check-types": "tsc",
+    "dev": "cross-env LOG_LEVEL=info nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --require dotenv-flow/config --exec ts-node -r tsconfig-paths/register src/index.local.ts",
+    "test:coverage": "cross-env NODE_ENV=test nyc --reporter=text-summary --reporter=text --reporter=lcov mocha --reporter mocha-sonarqube-reporter --reporter-options output=test-report.xml --timeout 3000 --recursive -r ts-node/register -r tsconfig-paths/register 'src/**/*.spec.ts'",
+    "test": "cross-env NODE_ENV=test mocha --timeout 3000 --recursive -r ts-node/register -r tsconfig-paths/register 'src/**/*.spec.ts'",
+    "debug": "node --inspect-brk nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec ts-node src/index.local.ts --require dotenv-flow/config -r",
+    "lint": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint --fix 'src/**/*.ts'",
+    "prettier": "prettier --check 'src/**/*.ts'",
+    "prettier:fix": "prettier --write 'src/**/*.ts'",
+    "start": "node ./dist/index.js",
+    "clean": "rimraf dist/",
+    "prepare": "husky install"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/**/*.spec.ts",
+      "src/interfaces/*",
+      "src/constants/*",
+      "src/types/*",
+      "src/enums/*",
+      "src/errors/*",
+      "src/index.ts",
+      "src/index.local.ts",
+      "src/services/yourDescriptiveListener/index.ts"
+    ],
+    "all": true
+  },
+  "engines": {
+    "node": ">=12.20.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foo/urp-microservice-lambda-template.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-sqs": "^3.34.0",
+    "@babel/runtime": "^7.17.0",
+    "aws-sdk": "^2.992.0",
+    "axios": "^0.21.4",
+    "babel-runtime": "^6.26.0",
+    "core-js": "^3.18.1",
+    "launchdarkly-node-server-sdk": "^6.2.3",
+    "lodash": "^4.17.21",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-object-rest-spread": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/axios": "^0.14.0",
+    "@types/chai": "^4.3.0",
+    "@types/chai-as-promised": "^7.1.4",
+    "@types/lodash": "^4.14.178",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^14.14.28",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "aws-sdk-mock": "^5.3.0",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-minify": "^0.5.1",
+    "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
+    "cross-env": "^7.0.3",
+    "dotenv-flow": "^3.2.0",
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-filename-rules": "^1.2.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest-formatting": "^3.1.0",
+    "eslint-plugin-mocha": "^10.0.3",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^7.0.4",
+    "mocha": "^9.2.0",
+    "mocha-sonarqube-reporter": "^1.0.2",
+    "nodemon": "^2.0.13",
+    "nyc": "^15.1.0",
+    "prettier": "^2.5.1",
+    "prettier-eslint": "^13.0.0",
+    "rimraf": "^3.0.2",
+    "sinon": "^13.0.1",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
+    "typescript": "^4.5.5",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/foo/urp-microservice-lambda-template/issues"
+  },
+  "homepage": "https://github.com/foo/urp-microservice-lambda-template#readme"
+}

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "noImplicitAny": false,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "target": "ES2017",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "pretty": true,
+    "sourceMap": true,
+    "typeRoots": ["node_modules/@types", "node_modules/@types/node"],
+    "emitDecoratorMetadata": true,
+    "types": ["mocha", "node"],
+    "baseUrl": "src",
+    "paths": {
+      "@fixtures/*": ["fixtures/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@services/*": ["services/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist/**/*"]
+}
